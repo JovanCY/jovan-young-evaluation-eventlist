@@ -1,12 +1,31 @@
-const BASE_API_URL = `http://localhost:3000/events`
 
 
-function getEvents() {
-   return fetch(BASE_API_URL).then( res => res.json())
-}
-function postEvents(newEvent) {
-   return fetch(BASE_API_URL, {
-      method: "POST", //header required?
-      body: JSON.stringify(newEvent)
-   }).then( res => res.json())
-}
+const eventAPI = (() => {
+   const BASE_API_URL = `http://localhost:3000/events`;
+   const fetchEventsAPI = async () => {
+     return fetch(BASE_API_URL).then((res) => res.json());
+   };
+ 
+   const postEventAPI = async (event) => {
+     return fetch(BASE_API_URL, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(event),
+     }).then((res) => res.json());
+   };
+ 
+   const deleteEventAPI = async (eventID) => {
+     return fetch(`${BASE_API_URL}/${eventID}`, {
+       method: "DELETE",
+     }).then((res) => res.json());
+   };
+ 
+   return {
+     fetchEventsAPI,
+     postEventAPI,
+     deleteEventAPI,
+   };
+ })();
+ 

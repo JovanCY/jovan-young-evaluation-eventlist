@@ -6,6 +6,12 @@ class EventListController {
     this.#model = model;
     this.#view = view;
     this.#model.initializeEvents();
+    const events = this.#model.getEvents()
+
+    events.map((event) => {
+      console.log("hey")
+      this.#view.addNewRow(event)
+    })
     this.setupEvents();
     this.populateEvents();
   }
@@ -18,7 +24,8 @@ class EventListController {
 
   setupEvents() {
     this.toggleAddEvent();
-    this.setUpCancelEvent();
+    this.setupFormCancelButton();
+    this.setupFormAddButton();
   }
 
   toggleAddEvent() {
@@ -31,21 +38,30 @@ class EventListController {
     });
   }
 
-  setupAddRowButton() {
-   this.#view.addButton.addEventListener("click", (event)=> {
+  setupFormAddButton() {
+    this.#view.formAddButton.addEventListener("click", async (event) => {
       event.preventDefault();
-      //input validation 
 
-      
-   })
+      //input validation
+      const input = this.#view.getFormFields();
+      console.log(input);
+      const { eventName, startDate, endDate } = input;
+      if (!!eventName && !!startDate && !!endDate) {
+        console.log("addEvent called");
+        //push event to API and model
+        const event = await this.#model.addEvent(input);
+        console.log("==event ", event);
+        this.#view.addNewRow(event);
+        this.#view.clearForm();
+      }
+    });
   }
-  setUpCancelEvent() {
-    this.#view.cancelButton.addEventListener("click", (event) => {
+  setupFormCancelButton() {
+    this.#view.formCancelButton.addEventListener("click", (event) => {
       event.preventDefault();
       console.log("cancelEvent called");
       this.#view.hideAddRow();
-      this.#view.clearForm()
+      this.#view.clearForm();
     });
-
   }
 }

@@ -6,7 +6,7 @@ class EventListModel {
    }
 
    async initializeEvents() {
-      const events = await getEvents() 
+      const events = await fetchEventsAPI() 
 
       console.log(events)
    }
@@ -15,8 +15,11 @@ class EventListModel {
       return [...this.#events]
    }
 
-   async addEvent(event) {
-      await postEvents(event)
+   async addEvent(event) { //returns id of event if success, -1 if not
+      
+      console.log("addEvent")
+      const response = await postEventAPI(event)
+      return response
    }
 
    async deleteEvent(id) {
