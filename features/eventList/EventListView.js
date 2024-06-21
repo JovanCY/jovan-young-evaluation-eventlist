@@ -6,6 +6,9 @@ class EventListView {
     this.formCancelButton = document.getElementById("cancel-button");
     this.form = document.getElementById("add-form");
     this.addRow = document.getElementById("add-row");
+
+    this.deleteButtons = document.getElementsByClassName("delete-row")
+    this.editButtons = document.getElementsByClassName("edit-row")
   }
 
   showAddRow() {
@@ -91,4 +94,6 @@ class EventListView {
       return;
     }
   }
+
+
 }

@@ -1,29 +1,28 @@
 class EventListModel {
-   #events;
+  #events;
 
-   constructor() {
-      this.#events = [];
-   }
+  constructor() {
+    this.#events = [];
+  }
 
-   async initializeEvents() {
-      const events = await fetchEventsAPI() 
+  async initializeEvents() {
+    this.#events = await eventAPI.fetchEventsAPI();
+    console.log(this.#events);
+  }
 
-      console.log(events)
-   }
+  getEvents() {
+    return [...this.#events];
+  }
 
-   getEvents() {
-      return [...this.#events]
-   }
+  async addEvent(event) {
+    //returns id of event if success, -1 if not
+    this.#events.push(event);
+    console.log("addEvent");
+    const response = await eventAPI.postEventAPI(event);
+    return response;
+  }
 
-   async addEvent(event) { //returns id of event if success, -1 if not
-      
-      console.log("addEvent")
-      const response = await postEventAPI(event)
-      return response
-   }
-
-   async deleteEvent(id) {
-
-   }
-
+  async deleteEvent(id) {
+    this.#events = this.#events.filter((event) => event.id !== id);
+  }
 }

@@ -2,21 +2,19 @@ class EventListController {
   #model;
   #view;
 
-  constructor(model, view) {
+constructor(model, view) {
     this.#model = model;
     this.#view = view;
-    this.#model.initializeEvents();
+    
     const events = this.#model.getEvents()
-
-    events.map((event) => {
-      console.log("hey")
-      this.#view.addNewRow(event)
-    })
-    this.setupEvents();
+    
     this.populateEvents();
+    this.setupEvents();
   }
 
-  populateEvents() {
+  async populateEvents() {
+    await this.#model.initializeEvents();
+
     this.#model.getEvents().map((event) => {
       this.#view.addNewRow(event);
     });
@@ -26,6 +24,7 @@ class EventListController {
     this.toggleAddEvent();
     this.setupFormCancelButton();
     this.setupFormAddButton();
+    this.setupDeleteButton()
   }
 
   toggleAddEvent() {
@@ -63,5 +62,19 @@ class EventListController {
       this.#view.hideAddRow();
       this.#view.clearForm();
     });
+  }
+
+  setupDeleteButton() {
+   //updates deleteButtons
+   this.#view.deleteButtons = document.getElementsByClassName("delete-row")
+   console.log("----", this.deleteButtons)
+   // this.#view.deleteButtons.map((button)=>  {
+   //    button.addEventListener("click", (event) => {
+   //       event.preventDefault()
+
+   //       const row = button.closest('tr')
+   //       console.log(row)
+   //    })
+   // })
   }
 }
