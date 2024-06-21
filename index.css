@@ -1,0 +1,63 @@
+
+* {
+   padding:0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+html {
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+#new-btn-container {
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+}
+
+
+#btn-new-event {
+   padding: 1rem;
+   font-size: large;
+   color: white;
+   border-radius: 10px;
+}
+
+.event-list__row {
+   background-color: #e6e2d3;
+   border-radius: 10px;
+   width: 80vw;
+}
+
+.row-button {
+   border-radius: 7px;
+   width: 2rem;
+   height: 2rem;
+   color: white;
+}
+
+/*=================================== colors */
+/* Tan: #e6e2d3
+Traffic white: #f0f0f0
+Yellow green: #4caf50
+Vermillion red: #c94c4c
+Blue: #008cba */
+.blue {
+   background-color:#008cba ;
+}
+
+.red {
+   background-color: #c94c4c ;
+}
+
+.tan {
+   background-color: #e6e2d3;
+}
+
+.hidden {
+   visibility: hidden;
+}
+
