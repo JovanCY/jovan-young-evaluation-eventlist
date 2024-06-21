@@ -18,11 +18,12 @@ class EventListModel {
     //returns id of event if success, -1 if not
     this.#events.push(event);
     console.log("addEvent");
-    const response = await eventAPI.postEventAPI(event);
-    return response;
+    
   }
 
-  async deleteEvent(id) {
+deleteEvent(id) {
     this.#events = this.#events.filter((event) => event.id !== id);
   }
+
+
 }

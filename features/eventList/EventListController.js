@@ -48,7 +48,9 @@ constructor(model, view) {
       if (!!eventName && !!startDate && !!endDate) {
         console.log("addEvent called");
         //push event to API and model
-        const event = await this.#model.addEvent(input);
+         this.#model.addEvent(input);
+        const event = await eventAPI.postEventAPI(event);
+    
         console.log("==event ", event);
         this.#view.addNewRow(event);
         this.#view.clearForm();
@@ -67,14 +69,26 @@ constructor(model, view) {
   setupDeleteButton() {
    //updates deleteButtons
    this.#view.deleteButtons = document.getElementsByClassName("delete-row")
-   console.log("----", this.deleteButtons)
-   // this.#view.deleteButtons.map((button)=>  {
-   //    button.addEventListener("click", (event) => {
-   //       event.preventDefault()
+   // console.log("----", this.deleteButtons)
 
-   //       const row = button.closest('tr')
-   //       console.log(row)
-   //    })
-   // })
+   this.#view.deleteButtons.forEach((button)=>  {
+      button.addEventListener("click", (event) => {
+         event.preventDefault()
+
+         const row = button.closest('tr');
+         
+      
+      // Check if the row is found
+      if (row) {
+        row.parentElement.removeChild(row); // Remove the row from the DOM
+        console.log(`Row with ID ${row.id} deleted.`);
+      } else {
+        console.error('Row not found for the clicked button.');
+      }})
+   })
   }
+
+//   setupEditButtons() {
+//    this.#
+//   }
 }

@@ -21,6 +21,13 @@ const eventAPI = (() => {
        method: "DELETE",
      }).then((res) => res.json());
    };
+
+   const putEventAPI = async (event) => {
+      const {id} = event
+      return fetch(`${BASE_API_URL}/${id}`, {
+        method: "PUT",
+      }).then((res) => res.json());
+    };
  
    return {
      fetchEventsAPI,
